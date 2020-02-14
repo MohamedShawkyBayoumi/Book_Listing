@@ -1,0 +1,181 @@
+/* START_HEADER */
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 5px #333;
+}
+
+.header-edit-mode {
+    background-color: #670001 !important;
+}
+
+.logo h1 {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.logo h1 a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 26px;
+}
+
+.links ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.links ul li {
+    margin-right: 5px;
+}
+
+.links ul li a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #008cff;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.links ul li a:hover {
+    background-color: #289eff;
+}
+
+.edit-mode {
+    margin-left: 10px;
+}
+
+.edit-mode a {
+    background-color: #ff0080 !important;
+}
+
+.edit-mode a:hover {
+    background-color: #ff2893 !important;
+}
+
+.exit-edit-mode-btn a {
+    background-color: #336601 !important;
+}
+
+.exit-edit-mode-btn a:hover {
+    background-color: #438501 !important;
+}
+
+/* END_HEADER */
+
+
+/* START BOOK ROW */
+
+.book-row {
+    border-bottom: 1px solid #333;
+    margin: 0 30px 30px 30px;
+}
+
+.book-img {
+    margin-right: 15px;
+    border: 1px solid #ccc;
+    width: 170px;
+    height: 170px;
+}
+
+.book-img img {
+    width: 170px;
+    height: 170px;
+}
+
+.book-content {
+    padding: 5px 10px;
+}
+
+.book-content h1 a {
+    text-decoration: none;
+    color: #333;
+}
+
+.book-content h1 a:hover {
+    color: rgb(119, 119, 119);
+}
+
+/* END BOOK ROW */
+
+/* SINGLE BOOK */
+
+.book-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-info div h4 {
+    margin: 0;
+}
+
+.book-info div h4 span {
+    font-weight: 400;
+}
+
+.single-book p {
+    width: 90%;
+}
+
+/* SINGLE BOOK */
+
+/* START FORM UI ELEMENTS */
+
+.input-label {
+    color: #ccc;
+}
+
+input, textarea, select {
+    width: 100%;
+    box-sizing: border-box;
+    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+input, select {
+    height: 40px;
+}
+
+textarea {
+    height: 200px;
+    padding: 10px;
+    resize: none;
+}
+
+
+button {
+    background-color: #3d8bcd;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #48a0ec;
+}
+
+.cancel-btn {
+    margin-left: 10px;
+    background: none;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.cancel-btn:hover {
+    background-color: rgb(250, 250, 250);
+}
+
+/* END FORM UI ELEMENTS */
