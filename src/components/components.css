@@ -15,10 +15,15 @@ header {
     background-color: #670001 !important;
 }
 
+.logo {
+    display: flex;
+}
+
 .logo h1 {
     margin: 0;
     padding: 0;
     display: flex;
+    margin-right: 10px;
 }
 
 .logo h1 a {
@@ -29,6 +34,7 @@ header {
 
 .links ul {
     display: flex;
+    align-items: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -44,29 +50,52 @@ header {
     background-color: #008cff;
     padding: 10px 20px;
     border-radius: 10px;
+    font-size: 16px;
 }
 
 .links ul li a:hover {
     background-color: #289eff;
 }
 
+
+.links ul li button {
+    padding: 11px 20px !important;
+    border-radius: 10px !important;
+    background-color: #ff0080;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.links ul li button:hover {
+    background-color: #ff2893;
+}
+
+button:hover {
+    background-color: #48a0ec;
+}
+
 .edit-mode {
-    margin-left: 10px;
+    display: flex;
+    align-items: center;
 }
 
-.edit-mode a {
-    background-color: #ff0080 !important;
+.edit-mode span {
+    background-color: #dd524d;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-size: 12px;
 }
 
-.edit-mode a:hover {
-    background-color: #ff2893 !important;
-}
-
-.exit-edit-mode-btn a {
+.exit-edit-mode-btn button {
     background-color: #336601 !important;
 }
 
-.exit-edit-mode-btn a:hover {
+.exit-edit-mode-btn button:hover {
     background-color: #438501 !important;
 }
 
@@ -103,6 +132,28 @@ header {
 
 .book-content h1 a:hover {
     color: rgb(119, 119, 119);
+}
+
+.book-content > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-link {
+    margin-left: 10px;
+}
+
+.edit-link a {
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background-color: #54bfdf;
+}
+
+.edit-link a:hover {
+    background-color: #70dbfc;
 }
 
 /* END BOOK ROW */
@@ -153,7 +204,6 @@ textarea {
     resize: none;
 }
 
-
 button {
     background-color: #3d8bcd;
     color: #fff;
@@ -179,3 +229,50 @@ button:hover {
 }
 
 /* END FORM UI ELEMENTS */
+
+/* START PAGINATION */
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-container nav {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pagination li {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-right: 1px solid #ccc;
+    color: #48a0ec;
+}
+
+.pagination li:hover,
+.pagination-active {
+    background-color: #48a0ec;
+    color: #fff !important;
+}
+
+.pagination li:last-child {
+    border: none;
+}
+
+/* END PAGINATION */
+
+/* START SEARCH */
+
+.search {
+    width: 50%;
+}
+
+/* END SEARCH */

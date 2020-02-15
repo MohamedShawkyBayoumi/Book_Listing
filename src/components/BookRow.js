@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BookIMG from './BookIMG';
+import { connect } from 'react-redux';
+import EditLink from '../components/EditLink';
 
-const BookRow = ({ id, title, description, image }) => {
+const BookRow = ({ id, title, description, image, edit_mode }) => {
     return (
         <div className="book-row">
             <BookIMG
@@ -10,11 +12,20 @@ const BookRow = ({ id, title, description, image }) => {
                 image={image}
             />
             <div className="book-content">
-                <h1><Link to={`/book/${id}`}>{title}</Link></h1>
+                <div>
+                    <h1><Link to={`/book/${id}`}>{title}</Link></h1>
+                    {edit_mode && (
+                        <EditLink to={`/book/${id}/edit`} />
+                    )}
+                </div>
                 <p>{description}</p>
             </div>
         </div>
     )
 }
 
-export default BookRow;
+const mapStateToProps = state => ({
+    edit_mode: state.general.edit_mode
+});
+
+export default connect(mapStateToProps)(BookRow);

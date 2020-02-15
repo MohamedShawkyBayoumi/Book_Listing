@@ -1,33 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import AsideBlock from './components/AsideBlock';
-import data from './Data/books.json';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import SingleBook from './pages/SingleBook';
 import SingleAuthor from './pages/SingleAuthor';
-import SingleCategory from './components/SingleCategory';
+import SingleCategory from './pages/SingleCategory';
 import NewAuthor from './pages/NewAuthor';
 import NewCategory from './pages/NewCategory';
 import NewBook from './pages/NewBook';
+import { connect } from 'react-redux';
 
-function App() {
-
-  const [books, setBooks] = useState([]),
-        [authors, setAuthors] = useState([]),
-        [categories, setCategories] = useState([]);
-  
-  useEffect(() => {
-
-    // Fake async request
-    setTimeout(() => {
-      setBooks(data.books);
-      setAuthors(data.authors);
-      setCategories(data.categories);
-    }, 1000);
-
-  }, []);
+function App({ books, categories, authors }) {
 
   return (
     <div className="App">
@@ -54,23 +39,40 @@ function App() {
             <Route
               exact
               path="/"
-              render={() => <Home books={books} />}
+              render={
+                () => 
+                <Home
+                  books={books}
+                />
+              }
             />
             <Route
               path="/author/new"
-              render={() => <NewAuthor />}
+              render={props => <NewAuthor {...props} />}
+            />
+            <Route
+              path="/author/:authorId/edit"
+              render={props => <NewAuthor {...props} />}
             />
             <Route
               path="/category/new"
               render={props => <NewCategory {...props} />}
             />
             <Route
+              path="/category/:categoryId/edit"
+              render={props => <NewCategory {...props} />}
+            />
+            <Route
               path="/book/new"
-              render={() => <NewBook />}
+              render={props => <NewBook {...props} />}
+            />
+            <Route
+              path="/book/:bookId/edit"
+              render={props => <NewBook {...props} />}
             />
             <Route
               path="/book/:bookId"
-              render={props => <SingleBook books={books} {...props} />}
+              render={props => <SingleBook authors={authors} categories={categories} books={books} {...props} />}
             />
             <Route
               path="/author/:authorId"
@@ -88,4 +90,14 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  books: state.books.items,
+  authors: state.authors.items,
+  categories: state.categories.items
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

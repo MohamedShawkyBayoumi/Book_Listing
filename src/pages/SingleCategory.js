@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import EditLink from '../components/EditLink';
 import Pagination from '../components/Pagination';
 
-const SingleAuthor = ({
-    authors = [],
+const SingleCategory = ({
+    categories = [],
     books = [],
-    match: { params: { authorId } },
+    match: { params: { categoryId } },
     edit_mode
 }) => {
-    let index = authors.findIndex(author => author.id === authorId);
+    let index = categories.findIndex(author => author.id === categoryId);
 
-    let author = authors[index];
+    let category = categories[index];
 
-    let filteredBooks = books.length > 0 && author ? books.filter(book => book.author === author.id) : [];
+    let filteredBooks = books.length > 0 && category ? books.filter(book => book.category === category.id) : [];
+
 
     const [currentPage, setCurrentPage] = useState(1),
           [booksPerPage, setBooksPerPagev] = useState(6);
@@ -27,17 +28,15 @@ const SingleAuthor = ({
     }
 
     return (
-        <div className="single-author">
-            {author && (
+        <div className="single-category">
+            {category && (
                 <div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <h1>{author.name}</h1>
+                        <h1>{category.name}</h1>
                         {edit_mode && (
-                            <EditLink to={`/author/${author.id}/edit`} />
+                            <EditLink to={`/category/${category.id}/edit`} />
                         )}
                     </div>
-                    <h2>{author.jobTitle}</h2>
-                    <p>{author.bio}</p>
                     {/* {filteredBooks && filteredBooks.length > 0 && filteredBooks.map((book, i) => (
                         <BookRow {...book} key={i} />
                     ))} */}
@@ -57,4 +56,4 @@ const mapStateToProps = state => ({
     edit_mode: state.general.edit_mode
 });
 
-export default connect(mapStateToProps)(SingleAuthor);
+export default connect(mapStateToProps)(SingleCategory);

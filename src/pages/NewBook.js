@@ -1,24 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, TextArea, Button, DropDown } from '../components/FORM-UI';
-import data from '../Data/books.json';
+import { addBook, editBook } from '../actions';
+import { connect } from 'react-redux';
+import uuidv1 from 'uuid/v1';
 
-const NewBook = () => {
+const NewBook = ({
+    add_book,
+    edit_book,
+    edit_mode,
+    history: { push, goBack },
+    categories = [],
+    authors = [],
+    books = [],
+    match: { params: { bookId } }
+}) => {
+    
+
+    const book = books.find(book => book.id === bookId);
+
     const [values, setValues] = useState({
         title: '',
         description: '',
         isbn: '',
-        no_pages: 0,
-        year: '',
-        image_url: ''
-    }),
-    [categories, setCategories] = useState([]),
-    [authors, setAuthors] = useState([]);
+        pagesNumber: 0,
+        publishYear: '',
+        image: '',
+        author: '',
+        category: ''
+    });
 
     useEffect(() => {
-        setTimeout(() => {
-            setCategories(data.categories);
-            setAuthors(data.authors);
-        }, 1000);
+
+        if(book && edit_mode){
+            setValues(book);
+        }
+
     }, []);
 
     const handleChange = (e, name) => {
@@ -30,18 +46,36 @@ const NewBook = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log('test');
+        
+        try {
+
+            let payload = {
+                id: uuidv1(),
+                ...values
+            }
+
+            edit_mode ? edit_book(payload) : add_book(payload);
+
+            setTimeout(() => {
+                push(`/book/${payload.id}`);
+            }, 1000);
+            
+
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     const cancel = () => {
-
+        goBack();
     }
 
-    const { title, description, isbn, no_pages, year, image_url } = values;
+    const { title, description, isbn, pagesNumber, publishYear, image, category, author } = values;
 
     return (
         <div className="new-category">
-            <h1>Add new Book</h1>
+            <h1>{edit_mode ? 'Edit' : 'Add new'} Book</h1>
             <form onSubmit={handleSubmit}>
                 <TextInput
                     className="mar-bot-10"
@@ -54,12 +88,16 @@ const NewBook = () => {
                         className="mar-right-20"
                         label="Category"
                         defaultValue="Select category"
+                        value={category}
                         options={categories}
+                        onChange={e => handleChange(e, 'category')}
                     />
                     <DropDown
-                        label="Category"
-                        defaultValue="Select category"
+                        label="Author"
+                        defaultValue="Select Author"
+                        value={author}
                         options={authors}
+                        onChange={e => handleChange(e, 'author')}
                     />
                 </div>
                 <TextArea
@@ -79,24 +117,24 @@ const NewBook = () => {
                         className="mar-right-20"
                         label="No. of pages"
                         type="number"
-                        value={no_pages}
-                        onChange={e => handleChange(e, 'no_pages')}
+                        value={pagesNumber}
+                        onChange={e => handleChange(e, 'pagesNumber')}
                     />
                     <TextInput
                         className="mar-bot-10"
                         label="Year published"
-                        value={year}
-                        onChange={e => handleChange(e, 'year')}
+                        value={publishYear}
+                        onChange={e => handleChange(e, 'publishYear')}
                     />
                 </div>
                 <TextInput
                     className="mar-bot-20"
                     label="Image URL"
-                    value={image_url}
-                    onChange={e => handleChange(e, 'image_url')}
+                    value={image}
+                    onChange={e => handleChange(e, 'image')}
                 />
                 <Button 
-                    label="Save"
+                    label={`${edit_mode ? 'Edit' : 'Save'}`}
                 />
                 <Button
                     className="cancel-btn"
@@ -108,4 +146,16 @@ const NewBook = () => {
     )
 }
 
-export default NewBook;
+const mapStateToProps = state => ({
+    books: state.books.items,
+    categories: state.categories.items,
+    authors: state.authors.items,
+    edit_mode: state.general.edit_mode
+});
+
+const mapDispatchToProps = dispatch => ({
+    add_book: data => dispatch(addBook(data)),
+    edit_book: data => dispatch(editBook(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewBook);

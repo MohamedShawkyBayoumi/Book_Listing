@@ -1,14 +1,14 @@
+import { combineReducers } from 'redux';
+import booksReducer from './booksReducer';
+import authorsReducer from './authorsReducer';
+import categoriesReducer from './categoriesReducer';
+import generalReducer from './generalReducer';
 
-const initial_store = {
-
-}
-
-const reducer = (state = initial_store, action) => {
-    switch(action.type){
-        default:
-            return state;
-        
-    }
-}
+const reducer = combineReducers({
+    books: booksReducer,
+    authors: authorsReducer,
+    categories: categoriesReducer,
+    general: generalReducer
+});
 
 export default reducer;
