@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import BookRow from '../components/BookRow';
 import Pagination from '../components/Pagination';
 import { TextInput } from '../components/FORM-UI';
@@ -21,6 +21,13 @@ const Home = ({ books = [], search }) => {
         setValue(e.target.value);
         search(e.target.value);
     }
+
+
+    useEffect(() => {
+        return () => {
+            search('');
+        }
+    }, []);
 
     return (
         <div>
